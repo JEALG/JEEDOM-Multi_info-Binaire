@@ -1,0 +1,70 @@
+<div style="padding:0;width:90px;min-height:62px;" class="cmd #history# tooltips cursor cmd-widget" data-type="info" data-subtype="binary" data-cmd_id="#id#" data-cmd_uid="#uid#" data-eqLogic_id="#eqLogic_id#" data-eqLogic_id="#eqLogic_id#" title="#collectDate#">
+    <!-- Info Widget
+        Basé sur les widget de 	: 
+        Mise à jour 			: JAG 20190829 : Correction variable
+	-->
+    <div class="title #hide_name#">
+        <div class="cmdName" style="#hideCmdName#">#name_display#</div>
+    </div>
+        <div class="content-sm ">
+            <span class="iconCmd#uid#"></span>
+    </div>
+    <div style="font-weight: bold;font-size : 10px;">
+        <span class="timeCmd#id# timeCmd label label-default value"></span>
+    </div>
+<script> 
+	jeedom.cmd.update['#id#'] = function(_options){
+		// Paramètrage du logo
+			var srcImglogoON	= ('#logoON#'!='#'+'logoON#') ? "#logoON#" : "oeiloff";
+			var srcImglogoON_T 	= ('#logo_type#'!='#'+'logo_type#') ? "#logo_type#": "png";
+        // Valeur pour OFF ou 0
+      		var srcImglogoOFF	= ('#logoOFF#'!='#'+'logoOFF#') ? "#logoOFF#" : "oeilon";
+            var srcImglogoOFF_T = ('#logoOFF_type#'!='#'+'logoOFF_type#') ? "#logoOFF_type#" : "png";
+		// Paramètrage du logo pour Erreur
+			var srcImglogoER	= ('#logoER#'!='#'+'logoER#') ? "#logoER#": "oups";
+			var srcImglogoER_T 	= ('#logoER_type#'!='#'+'logoER_type#') ? "#logoER_type#": "png";
+		// Paramètre "sizeh" & "sizew"
+			var srcImgHeight	= is_numeric('#sizeh#') ? parseFloat('#sizeh#'):80;
+			var srcImgWidth 	= is_numeric('#sizew#') ? parseFloat('#sizew#'):80;
+			var srcImgSize 		= 'height='+srcImgHeight+'px width='+srcImgWidth+'px';
+		// Paramétrage des images
+            var srcFolder       = ('#dossier#'!='#'+'dossier#') ? "#dossier#" : "FibaroOeil";
+            if (srcFolder == 'NULL') {
+                var srcImgURL           = "plugins/widget/core/template/dashboard/cmd.info.binary.Multi info - Binaire/";
+            } else {
+                var srcImgURL           = "plugins/widget/core/template/dashboard/cmd.info.binary.Multi info - Binaire/"+srcFolder+'/';
+            };  
+			
+            var srcImgError 	= "plugins/widget/core/template/dashboard/cmd.info.binary.Multi info - Binaire/" +srcImglogoER+"."+srcImglogoER_T;      //  Pour valeur = Erreur
+        
+		// Affichage durée changement dernier etat
+			var srcImglogoTime   = '#logoTime#';
+			var srcImgPath;
+        
+        if (_options.display_value == '1') {
+            $('.cmd[data-cmd_id=#id#] .iconCmd#uid#').empty().append('<img src="'+srcImgURL +srcImglogoON +'.'+ srcImglogoON_T+'" '+srcImgSize+'>');
+        }else if (_options.display_value == '0') {
+            $('.cmd[data-cmd_id=#id#] .iconCmd#uid#').empty().append('<img src="'+srcImgURL +srcImglogoOFF +'.'+ srcImglogoOFF_T+'" '+srcImgSize+'>');
+        }else {
+            $('.cmd[data-cmd_id=#id#] .iconCmd#uid#').empty().append('<img src="'+srcImgError+'" '+srcImgSize+'>');
+        }
+      
+		// Derniere durée changement dernier etat
+			//Merci @Salvialf pour le code
+			if (srcImglogoTime == "duree") {
+				jeedom.cmd.displayDuration(_options.valueDate, $('.cmd[data-cmd_id=#id#] .timeCmd#id#'));
+			} else if (srcImglogoTime == "date") {
+				var srcdate     = new Date(_options.valueDate);
+				var srcformat   = $.datepicker.formatDate('D dd/mm', srcdate);
+				var srctime     = "à "+srcdate.getHours()+":"+(srcdate.getMinutes()<10?'0':'')+srcdate.getMinutes();
+				$('.cmd[data-cmd_id=#id#] .timeCmd#id#').empty().html(srcformat+'<br>'+srctime);
+			} else if (srcImglogoTime == "heure") {
+				var srcdate     = new Date(_options.valueDate);
+				var srctime     = "à "+srcdate.getHours()+":"+(srcdate.getMinutes()<10?'0':'')+srcdate.getMinutes()+":"+(srcdate.getSeconds()<10?'0':'')+srcdate.getSeconds()+"";
+				$('.cmd[data-cmd_id=#id#] .timeCmd#id#').empty().html(srctime);
+			};
+		$('.cmd[data-cmd_id=#id#]').attr('title','Valeur du '+_options.valueDate+', collectée le '+_options.collectDate);
+	} 
+	jeedom.cmd.update['#id#']({display_value:'#state#',valueDate:'#valueDate#',collectDate:'#collectDate#',alertLevel:'#alertLevel#'});
+</script>
+</div>
