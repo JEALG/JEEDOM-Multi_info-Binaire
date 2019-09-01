@@ -37,7 +37,7 @@
 		// Paramétrage des dossiers
                     var srcFolder           = ('#dossier#'!='#'+'dossier#') ? "#dossier#" : "FibaroOeil";
                     var srcFolderErreur     = ('#dossierER#'!='#'+'dossierER#') ? "#dossierER#" : "Erreur_danger";
-                    var srcImgURLError      = "plugins/widget/core/template/dashboard/cmd.info.binary.Multi info - Binaire/" +srcImglogoER+"."+srcImglogoER_T;
+                    var srcImgURLError      = "plugins/widget/core/template/dashboard/cmd.info.binary.Multi info - Binaire/"+srcFolderErreur+'/';
             if (srcFolder == 'NULL') {
                     var srcImgURL           = "plugins/widget/core/template/dashboard/cmd.info.binary.Multi info - Binaire/";
             } else {
@@ -53,7 +53,7 @@
         }else if (_options.display_value == '0') {
             $('.cmd[data-cmd_id=#id#] .iconCmd#uid#').empty().append('<img src="'+srcImgURL +srcImglogoOFF +'.'+ srcImglogoOFF_T+'" '+srcImgSize+'>');
         }else {
-            $('.cmd[data-cmd_id=#id#] .iconCmd#uid#').empty().append('<img src="'+srcImgURLError+'" '+srcImgSize+'>');
+            $('.cmd[data-cmd_id=#id#] .iconCmd#uid#').empty().append('<img src="'+srcImgURLError  +srcImglogoER +'.'+ srcImglogoER_T+'" '+srcImgSize+'>');
         }
       
 		// Derniere durée changement dernier etat
