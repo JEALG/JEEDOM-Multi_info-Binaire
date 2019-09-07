@@ -1,7 +1,7 @@
 <div style="padding:0;width:90px;min-height:62px;" class="cmd #history# tooltips cursor cmd-widget" data-type="info" data-subtype="binary" data-cmd_id="#id#" data-cmd_uid="#uid#" data-eqLogic_id="#eqLogic_id#" data-eqLogic_id="#eqLogic_id#" title="#collectDate#">
     <!-- Info Widget
         Basé sur les widget de 	: 
-        Mise à jour 			: JAG 20190109 : Correction variable Erreur + Ajout gestion image Erreur
+        Mise à jour 			: JAG 20190907 : Normalisation nom images => Merci à mich0111
 	-->
     <div class="title #hide_name#">
         <div class="cmdName" style="#hideCmdName#">#name_display#</div>
@@ -15,13 +15,13 @@
 <script> 
 	jeedom.cmd.update['#id#'] = function(_options){
 		// Paramètrage du logo
-                    var srcImglogoON        = ('#logoON#'!='#'+'logoON#') ? "#logoON#" : "Oeiloff";
+                    var srcImglogoON        = ('#logoON#'!='#'+'logoON#') ? "#logoON#" : "fi_wh_off";
                     var srcImglogoON_T      = ('#logo_type#'!='#'+'logo_type#') ? "#logo_type#": "png";
         // Valeur pour OFF ou 0
-      		        var srcImglogoOFF       = ('#logoOFF#'!='#'+'logoOFF#') ? "#logoOFF#" : "Oeilon";
+      		        var srcImglogoOFF       = ('#logoOFF#'!='#'+'logoOFF#') ? "#logoOFF#" : "fi_bu_on";
                     var srcImglogoOFF_T     = ('#logoOFF_type#'!='#'+'logoOFF_type#') ? "#logoOFF_type#" : "png";
 		// Paramètrage du logo pour Erreur
-                    var srcImglogoER        = ('#logoER#'!='#'+'logoER#') ? "#logoER#": "oups";
+                    var srcImglogoER        = ('#logoER#'!='#'+'logoER#') ? "#logoER#": "er_oups1";
                     var srcImglogoER_T      = ('#logoER_type#'!='#'+'logoER_type#') ? "#logoER_type#": "png";
                     var srcImgValueER       = ('#para_ER#'!='#'+'para_ER#') ? "#para_ER#": "";
         // Paramètre "sizeh" & "sizew"
@@ -36,7 +36,7 @@
                 }
         
 		// Paramétrage des dossiers
-                    var srcFolder           = ('#dossier#'!='#'+'dossier#') ? "#dossier#" : "FibaroOeil";  
+                    var srcFolder           = ('#dossier#'!='#'+'dossier#') ? "#dossier#" : "fibarooeil";  
             if (srcFolder == 'NULL') {
                     var srcImgURL           = "plugins/widget/core/template/dashboard/cmd.info.binary.Multi info - Binaire/";
             } else {
@@ -44,7 +44,7 @@
             };  
         
         // Gestion Erreur
-                    var srcFolderErreur     = ('#dossierER#'!='#'+'dossierER#') ? "#dossierER#" : "Erreur_danger";
+                    var srcFolderErreur     = ('#dossierER#'!='#'+'dossierER#') ? "#dossierER#" : "error";
             if (srcImgValueER == "logoON") {
                     var srcImgURLError      = srcImgURL;
                     var srcImglogoER        = srcImglogoON;
