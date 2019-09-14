@@ -1,7 +1,7 @@
 <div style="padding:0;width:90px;min-height:62px;" class="cmd #history# tooltips cursor cmd-widget" data-type="info" data-subtype="binary" data-cmd_id="#id#" data-cmd_uid="#uid#" data-eqLogic_id="#eqLogic_id#" data-eqLogic_id="#eqLogic_id#" title="#collectDate#">
     <!-- Info Widget
         Basé sur les widget de 	: 
-        Mise à jour 			: JAG 20190907 : Normalisation nom images => Merci à mich0111
+        Mise à jour 			: JAG 20190913 : Posibilité d'utiliser la normalisation des images
 	-->
     <div class="title #hide_name#">
         <div class="cmdName" style="#hideCmdName#">#name_display#</div>
@@ -14,47 +14,62 @@
     </div>
 <script> 
 	jeedom.cmd.update['#id#'] = function(_options){
-		// Paramètrage du logo
-                    var srcImglogoON        = ('#logoON#'!='#'+'logoON#') ? "#logoON#" : "fi_wh_off";
-                    var srcImglogoON_T      = ('#logo_type#'!='#'+'logo_type#') ? "#logo_type#": "png";
-        // Valeur pour OFF ou 0
-      		        var srcImglogoOFF       = ('#logoOFF#'!='#'+'logoOFF#') ? "#logoOFF#" : "fi_bu_on";
-                    var srcImglogoOFF_T     = ('#logoOFF_type#'!='#'+'logoOFF_type#') ? "#logoOFF_type#" : "png";
+        // Paramètrage du logo
+            // Valeur du logo
+                            var srcImglogo	    = ('#logo#'!='#'+'logo#') ? "#logo#" : "";
+                            var srcImglogo_T 	= ('#logo_type#'!='#'+'logo_type#') ? "#logo_type#" : "png";
+                // Paramétrage des images
+                    if (srcImglogo == "") {
+                        // Valeur pour ON ou 1
+                            var srcImglogoON    = ('#logoON#'!='#'+'logoON#') ? "#logoON#" : "fi_wh_off";
+                            var srcImglogoON_T  = ('#logoON_type#'!='#'+'logoON_type#') ? "#logoON_type#" : "png";
+                        // Valeur pour OFF ou 0
+                            var srcImglogoOFF   = ('#logoOFF#'!='#'+'logoOFF#') ? "#logoOFF#" : "fi_bu_on";
+                            var srcImglogoOFF_T = ('#logoOFF_type#'!='#'+'logoOFF_type#') ? "#logoOFF_type#" : "png";
+                    } else {
+                        // Valeur pour ON ou 1
+                            var srcImglogoON    = srcImglogo + '_on';
+                            var srcImglogoON_T  = srcImglogo_T;
+                        // Valeur pour OFF ou 0
+                            var srcImglogoOFF   = srcImglogo + '_off';
+                            var srcImglogoOFF_T = srcImglogo_T;
+                    };
+        
 		// Paramètrage du logo pour Erreur
-                    var srcImglogoER        = ('#logoER#'!='#'+'logoER#') ? "#logoER#": "er_oups4_or";
-                    var srcImglogoER_T      = ('#logoER_type#'!='#'+'logoER_type#') ? "#logoER_type#": "png";
-                    var srcImgValueER       = ('#para_ER#'!='#'+'para_ER#') ? "#para_ER#": "";
+                            var srcImglogoER    = ('#logoER#'!='#'+'logoER#') ? "#logoER#": "er_oups4_or";
+                            var srcImglogoER_T  = ('#logoER_type#'!='#'+'logoER_type#') ? "#logoER_type#": "png";
+                            var srcImgValueER   = ('#para_ER#'!='#'+'para_ER#') ? "#para_ER#": "";
         // Paramètre "sizeh" & "sizew"
-                    var srcImgHeight        = is_numeric('#sizeh#') ? parseFloat('#sizeh#'):80;
-                    var srcImgWidth         = is_numeric('#sizew#') ? parseFloat('#sizew#'):80;
+                            var srcImgHeight    = is_numeric('#sizeh#') ? parseFloat('#sizeh#'):80;
+                            var srcImgWidth     = is_numeric('#sizew#') ? parseFloat('#sizew#'):80;
             // Type de taille
-                    var srcImgpourcent      = ('#Pourcentage#'!='#'+'Pourcentage#') ? "#Pourcentage#" : "NO";
+                            var srcImgpourcent  = ('#Pourcentage#'!='#'+'Pourcentage#') ? "#Pourcentage#" : "NO";
                 if (srcImgpourcent  == "NO") {
-                    var srcImgSize          = 'height='+srcImgHeight+'px width='+srcImgWidth+'px';
+                            var srcImgSize      = 'height='+srcImgHeight+'px width='+srcImgWidth+'px';
                 } else if (srcImgpourcent  == "YES") {
-                    var srcImgSize          = 'height='+srcImgHeight+'% width='+srcImgWidth+'%';
-                }
+                            var srcImgSize      = 'height='+srcImgHeight+'% width='+srcImgWidth+'%';
+                };
         
 		// Paramétrage des dossiers
-                    var srcFolder           = ('#dossier#'!='#'+'dossier#') ? "#dossier#" : "fibarooeil";  
+                            var srcFolder       = ('#dossier#'!='#'+'dossier#') ? "#dossier#" : "fibarooeil";
             if (srcFolder == 'NULL') {
-                    var srcImgURL           = "plugins/widget/core/template/dashboard/cmd.action.other.Multi-action-Defaut/";
+                        var srcImgURL           = "plugins/widget/core/template/dashboard/cmd.action.other.Multi-action-Defaut/";
             } else {
-                    var srcImgURL           = "plugins/widget/core/template/dashboard/cmd.action.other.Multi-action-Defaut/"+srcFolder+'/';
-            };  
+                        var srcImgURL           = "plugins/widget/core/template/dashboard/cmd.action.other.Multi-action-Defaut/"+srcFolder+'/';
+            };
         
         // Gestion Erreur
-                    var srcFolderErreur     = ('#dossierER#'!='#'+'dossierER#') ? "#dossierER#" : "error";
+                        var srcFolderErreur     = ('#dossierER#'!='#'+'dossierER#') ? "#dossierER#" : "error";
             if (srcImgValueER == "logoON") {
-                    var srcImgURLError      = srcImgURL;
-                    var srcImglogoER        = srcImglogoON;
-                    var srcImglogoER_T      = srcImglogoON_T;
+                        var srcImgURLError      = srcImgURL;
+                        var srcImglogoER        = srcImglogoON;
+                        var srcImglogoER_T      = srcImglogoON_T;
             } else if (srcImgValueER == "logoOFF") {
-                    var srcImgURLError      = srcImgURL;
-                    var srcImglogoER        = srcImglogoOFF;
-                    var srcImglogoER_T      = srcImglogoOFF_T;
+                        var srcImgURLError      = srcImgURL;
+                        var srcImglogoER        = srcImglogoOFF;
+                        var srcImglogoER_T      = srcImglogoOFF_T;
             }else {
-                    var srcImgURLError      = "plugins/widget/core/template/dashboard/cmd.action.other.Multi-action-Defaut/"+srcFolderErreur+'/';
+                        var srcImgURLError      = "plugins/widget/core/template/dashboard/cmd.action.other.Multi-action-Defaut/"+srcFolderErreur+'/';
             };   
                 
 		// Affichage durée changement dernier etat
