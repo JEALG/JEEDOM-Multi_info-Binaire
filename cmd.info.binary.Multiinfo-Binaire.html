@@ -12,7 +12,7 @@
     <div class="value">
         <span style="min-width:100px" class="timeCmd#id# timeCmd label label-default value"></span>
     </div>
-<script> 
+<script>
 	jeedom.cmd.update['#id#'] = function(_options){
         // Paramètrage du logo
             // Valeur du logo
@@ -82,7 +82,7 @@
         }else {
             $('.cmd[data-cmd_id=#id#] .iconCmd#uid#').empty().append('<img src="'+srcImgURL_ER  +srcImglogoER +'.'+ srcImglogoER_T+'" '+srcImgSize+'>');
         }
-      
+
 		// Derniere durée changement dernier etat
 			//Merci @Salvialf pour le code
 			if (srcImglogoTime == "duree") {
