@@ -6,99 +6,104 @@
     <div class="title #hide_name#">
         <div class="cmdName" style="#hideCmdName#">#name_display#</div>
     </div>
-        <div class="content-sm ">
-            <span class="iconCmd#uid#"></span>
+    <div class="content-sm ">
+        <span class="iconCmd#uid#"></span>
     </div>
     <div class="value">
         <span style="min-width:100px" class="timeCmd#id# timeCmd label label-default value"></span>
     </div>
-<script>
-	jeedom.cmd.update['#id#'] = function(_options){
-        // Paramètrage du logo
+    <script>
+        jeedom.cmd.update['#id#'] = function(_options) {
+            // Paramètrage du logo
             // Valeur du logo
-                            var srcImglogo	    = ('#logo#'!='#'+'logo#') ? "#logo#" : "";
-                            var srcImglogo_T 	= ('#logo_type#'!='#'+'logo_type#') ? "#logo_type#" : "png";
-                // Paramétrage des images
-                    if (srcImglogo == "") {
-                        // Variable Image pour Valeur : ON ou 1
-                            var srcImglogoON    = ('#logoON#'!='#'+'logoON#') ? "#logoON#" : "fi_wh_off";
-                            var srcImglogoON_T  = ('#logoON_type#'!='#'+'logoON_type#') ? "#logoON_type#" : "png";
-                        // Variable Image pour Valeur : OFF ou 0
-                            var srcImglogoOFF   = ('#logoOFF#'!='#'+'logoOFF#') ? "#logoOFF#" : "fi_bu_on";
-                            var srcImglogoOFF_T = ('#logoOFF_type#'!='#'+'logoOFF_type#') ? "#logoOFF_type#" : "png";
-                    } else {
-                        // Variable Image pour Valeur : ON ou 1
-                            var srcImglogoON    = srcImglogo + '_on';
-                            var srcImglogoON_T  = srcImglogo_T;
-                        // VVariable Image pour Valeur : OFF ou 0
-                            var srcImglogoOFF   = srcImglogo + '_off';
-                            var srcImglogoOFF_T = srcImglogo_T;
-                    };
-        
-		// Paramètrage du logo pour Erreur
-                            var srcImglogoER    = ('#logoER#'!='#'+'logoER#') ? "#logoER#": "er_oups4_or";
-                            var srcImglogoER_T  = ('#logoER_type#'!='#'+'logoER_type#') ? "#logoER_type#": "png";
-                            var srcImgValueER   = ('#para_ER#'!='#'+'para_ER#') ? "#para_ER#": "";
-        // Paramètre "sizeh" & "sizew"
-                            var srcImgHeight    = is_numeric('#sizeh#') ? parseFloat('#sizeh#'):80;
-                            var srcImgWidth     = is_numeric('#sizew#') ? parseFloat('#sizew#'):80;
-            // Type de taille
-                            var srcImgpourcent  = ('#Pourcentage#'!='#'+'Pourcentage#') ? "#Pourcentage#" : "NO";
-                if (srcImgpourcent  == "NO") {
-                            var srcImgSize      = 'height='+srcImgHeight+'px width='+srcImgWidth+'px';
-                } else if (srcImgpourcent  == "YES") {
-                            var srcImgSize      = 'height='+srcImgHeight+'% width='+srcImgWidth+'%';
-                };
-        
-		// Paramétrage des dossiers
-                            var srcFolder       = ('#dossier#'!='#'+'dossier#') ? "#dossier#" : "fibarooeil";
-            if (srcFolder == 'NULL') {
-                            var srcImgURL       = "data/customTemplates/dashboard/cmd.action.other.Multi-action-Defaut/";
+            var srcImglogo = ('#logo#' != '#' + 'logo#') ? "#logo#" : "";
+            var srcImglogo_T = ('#logo_type#' != '#' + 'logo_type#') ? "#logo_type#" : "png";
+            // Paramétrage des images
+            if (srcImglogo == "") {
+                // Variable Image pour Valeur : ON ou 1
+                var srcImglogoON = ('#logoON#' != '#' + 'logoON#') ? "#logoON#" : "fi_wh_off";
+                var srcImglogoON_T = ('#logoON_type#' != '#' + 'logoON_type#') ? "#logoON_type#" : "png";
+                // Variable Image pour Valeur : OFF ou 0
+                var srcImglogoOFF = ('#logoOFF#' != '#' + 'logoOFF#') ? "#logoOFF#" : "fi_bu_on";
+                var srcImglogoOFF_T = ('#logoOFF_type#' != '#' + 'logoOFF_type#') ? "#logoOFF_type#" : "png";
             } else {
-                            var srcImgURL       = "data/customTemplates/dashboard/cmd.action.other.Multi-action-Defaut/"+srcFolder+'/';
+                // Variable Image pour Valeur : ON ou 1
+                var srcImglogoON = srcImglogo + '_on';
+                var srcImglogoON_T = srcImglogo_T;
+                // VVariable Image pour Valeur : OFF ou 0
+                var srcImglogoOFF = srcImglogo + '_off';
+                var srcImglogoOFF_T = srcImglogo_T;
             };
-        
-        // Gestion Erreur
-                        var srcFolderErreur     = ('#dossierER#'!='#'+'dossierER#') ? "#dossierER#" : "error";
-            if (srcImgValueER == "logoON") {
-                        var srcImgURL_ER        = srcImgURL;
-                        var srcImglogoER        = srcImglogoON;
-                        var srcImglogoER_T      = srcImglogoON_T;
-            } else if (srcImgValueER == "logoOFF") {
-                        var srcImgURL_ER        = srcImgURL;
-                        var srcImglogoER        = srcImglogoOFF;
-                        var srcImglogoER_T      = srcImglogoOFF_T;
-            }else {
-                        var srcImgURL_ER        = "data/customTemplates/dashboard/cmd.action.other.Multi-action-Defaut/"+srcFolderErreur+'/';
-            };   
-                
-		// Affichage durée changement dernier etat
-                    var srcImglogoTime      = '#logoTime#';
-        
-        if (_options.display_value == '1') {
-            $('.cmd[data-cmd_id=#id#] .iconCmd#uid#').empty().append('<img src="'+srcImgURL +srcImglogoON +'.'+ srcImglogoON_T+'" '+srcImgSize+'>');
-        }else if (_options.display_value == '0') {
-            $('.cmd[data-cmd_id=#id#] .iconCmd#uid#').empty().append('<img src="'+srcImgURL +srcImglogoOFF +'.'+ srcImglogoOFF_T+'" '+srcImgSize+'>');
-        }else {
-            $('.cmd[data-cmd_id=#id#] .iconCmd#uid#').empty().append('<img src="'+srcImgURL_ER  +srcImglogoER +'.'+ srcImglogoER_T+'" '+srcImgSize+'>');
-        }
 
-		// Derniere durée changement dernier etat
-			//Merci @Salvialf pour le code
-			if (srcImglogoTime == "duree") {
-				jeedom.cmd.displayDuration(_options.valueDate, $('.cmd[data-cmd_id=#id#] .timeCmd#id#'));
-			} else if (srcImglogoTime == "date") {
-				var srcdate     = new Date(_options.valueDate);
-				var srcformat   = $.datepicker.formatDate('D dd/mm', srcdate);
-				var srctime     = "à "+srcdate.getHours()+":"+(srcdate.getMinutes()<10?'0':'')+srcdate.getMinutes();
-				$('.cmd[data-cmd_id=#id#] .timeCmd#id#').empty().html(srcformat+' '+srctime);
-			} else if (srcImglogoTime == "heure") {
-				var srcdate     = new Date(_options.valueDate);
-				var srctime     = "à "+srcdate.getHours()+":"+(srcdate.getMinutes()<10?'0':'')+srcdate.getMinutes()+":"+(srcdate.getSeconds()<10?'0':'')+srcdate.getSeconds()+"";
-				$('.cmd[data-cmd_id=#id#] .timeCmd#id#').empty().html(srctime);
-			};
-		$('.cmd[data-cmd_id=#id#]').attr('title','Valeur du '+_options.valueDate+', collectée le '+_options.collectDate);
-	} 
-	jeedom.cmd.update['#id#']({display_value:'#state#',valueDate:'#valueDate#',collectDate:'#collectDate#',alertLevel:'#alertLevel#'});
-</script>
+            // Paramètrage du logo pour Erreur
+            var srcImglogoER = ('#logoER#' != '#' + 'logoER#') ? "#logoER#" : "er_oups4_or";
+            var srcImglogoER_T = ('#logoER_type#' != '#' + 'logoER_type#') ? "#logoER_type#" : "png";
+            var srcImgValueER = ('#para_ER#' != '#' + 'para_ER#') ? "#para_ER#" : "";
+            // Paramètre "sizeh" & "sizew"
+            var srcImgHeight = is_numeric('#sizeh#') ? parseFloat('#sizeh#') : 80;
+            var srcImgWidth = is_numeric('#sizew#') ? parseFloat('#sizew#') : 80;
+            // Type de taille
+            var srcImgpourcent = ('#Pourcentage#' != '#' + 'Pourcentage#') ? "#Pourcentage#" : "NO";
+            if (srcImgpourcent == "NO") {
+                var srcImgSize = 'height=' + srcImgHeight + 'px width=' + srcImgWidth + 'px';
+            } else if (srcImgpourcent == "YES") {
+                var srcImgSize = 'height=' + srcImgHeight + '% width=' + srcImgWidth + '%';
+            };
+
+            // Paramétrage des dossiers
+            var srcFolder = ('#dossier#' != '#' + 'dossier#') ? "#dossier#" : "fibarooeil";
+            if (srcFolder == 'NULL') {
+                var srcImgURL = "data/customTemplates/dashboard/cmd.action.other.Multi-action-Defaut/";
+            } else {
+                var srcImgURL = "data/customTemplates/dashboard/cmd.action.other.Multi-action-Defaut/" + srcFolder + '/';
+            };
+
+            // Gestion Erreur
+            var srcFolderErreur = ('#dossierER#' != '#' + 'dossierER#') ? "#dossierER#" : "error";
+            if (srcImgValueER == "logoON") {
+                var srcImgURL_ER = srcImgURL;
+                var srcImglogoER = srcImglogoON;
+                var srcImglogoER_T = srcImglogoON_T;
+            } else if (srcImgValueER == "logoOFF") {
+                var srcImgURL_ER = srcImgURL;
+                var srcImglogoER = srcImglogoOFF;
+                var srcImglogoER_T = srcImglogoOFF_T;
+            } else {
+                var srcImgURL_ER = "data/customTemplates/dashboard/cmd.action.other.Multi-action-Defaut/" + srcFolderErreur + '/';
+            };
+
+            // Affichage durée changement dernier etat
+            var srcImglogoTime = '#logoTime#';
+
+            if (_options.display_value == '1') {
+                $('.cmd[data-cmd_id=#id#] .iconCmd#uid#').empty().append('<img src="' + srcImgURL + srcImglogoON + '.' + srcImglogoON_T + '" ' + srcImgSize + '>');
+            } else if (_options.display_value == '0') {
+                $('.cmd[data-cmd_id=#id#] .iconCmd#uid#').empty().append('<img src="' + srcImgURL + srcImglogoOFF + '.' + srcImglogoOFF_T + '" ' + srcImgSize + '>');
+            } else {
+                $('.cmd[data-cmd_id=#id#] .iconCmd#uid#').empty().append('<img src="' + srcImgURL_ER + srcImglogoER + '.' + srcImglogoER_T + '" ' + srcImgSize + '>');
+            }
+
+            // Derniere durée changement dernier etat
+            //Merci @Salvialf pour le code
+            if (srcImglogoTime == "duree") {
+                jeedom.cmd.displayDuration(_options.valueDate, $('.cmd[data-cmd_id=#id#] .timeCmd#id#'));
+            } else if (srcImglogoTime == "date") {
+                var srcdate = new Date(_options.valueDate);
+                var srcformat = $.datepicker.formatDate('D dd/mm', srcdate);
+                var srctime = "à " + srcdate.getHours() + ":" + (srcdate.getMinutes() < 10 ? '0' : '') + srcdate.getMinutes();
+                $('.cmd[data-cmd_id=#id#] .timeCmd#id#').empty().html(srcformat + ' ' + srctime);
+            } else if (srcImglogoTime == "heure") {
+                var srcdate = new Date(_options.valueDate);
+                var srctime = "à " + srcdate.getHours() + ":" + (srcdate.getMinutes() < 10 ? '0' : '') + srcdate.getMinutes() + ":" + (srcdate.getSeconds() < 10 ? '0' : '') + srcdate.getSeconds() + "";
+                $('.cmd[data-cmd_id=#id#] .timeCmd#id#').empty().html(srctime);
+            };
+            $('.cmd[data-cmd_id=#id#]').attr('title', 'Valeur du ' + _options.valueDate + ', collectée le ' + _options.collectDate);
+        }
+        jeedom.cmd.update['#id#']({
+            display_value: '#state#',
+            valueDate: '#valueDate#',
+            collectDate: '#collectDate#',
+            alertLevel: '#alertLevel#'
+        });
+    </script>
 </div>
