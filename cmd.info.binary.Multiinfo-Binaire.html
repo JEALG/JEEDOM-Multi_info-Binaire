@@ -1,7 +1,7 @@
 <div style="min-width:90px;min-height:62px;" class="cmd #history# tooltips cursor cmd-widget" data-type="info" data-subtype="binary" data-cmd_id="#id#" data-cmd_uid="#uid#" data-eqLogic_id="#eqLogic_id#" data-eqLogic_id="#eqLogic_id#" title="#collectDate#">
     <!-- Info Widget
-        Basé sur les widget de 	: 
-        Mise à jour 			: JAG 20190918 : Migration uniquement pour core V4
+        Basé sur les widget de 	:
+        Mise à jour 			: JAG 20200421 : Amélioration code
 	-->
     <div class="title #hide_name#">
         <div class="cmdName" style="#hideCmdName#">#name_display#</div>
@@ -85,7 +85,7 @@
 
             // Derniere durée changement dernier etat
             //Merci @Salvialf pour le code
-            if (srcImglogoTime == "duree") {
+            if (srcImglogoTime == "duree"|| srcImglogoTime == "durée") {
                 jeedom.cmd.displayDuration(_options.valueDate, $('.cmd[data-cmd_id=#id#] .timeCmd#id#'));
             } else if (srcImglogoTime == "date") {
                 var srcdate = new Date(_options.valueDate);
@@ -105,5 +105,6 @@
             collectDate: '#collectDate#',
             alertLevel: '#alertLevel#'
         });
+
     </script>
 </div>
