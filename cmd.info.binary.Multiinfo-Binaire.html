@@ -2,7 +2,7 @@
     <!-- Info Widget
         Widget de           : JAG
         Widget pour le Core : V4
-        Mise à jour         : JAG 20200502 => Ajout Version Core
+        Mise à jour         : JAG 20201220 => Update suite changement localisation image
 	-->
     <div class="title #hide_name#">
         <div class="cmdName" style="#hideCmdName#">#name_display#</div>
@@ -54,9 +54,9 @@
             // Paramétrage des dossiers
             var srcFolder = ('#dossier#' != '#' + 'dossier#') ? "#dossier#" : "fibarooeil";
             if (srcFolder == 'NULL') {
-                var srcImgURL = "data/customTemplates/dashboard/cmd.action.other.Multi-action-Defaut/";
+                var srcImgURL = "data/img/";
             } else {
-                var srcImgURL = "data/customTemplates/dashboard/cmd.action.other.Multi-action-Defaut/" + srcFolder + '/';
+                var srcImgURL = "data/img/" + srcFolder + '/';
             };
 
             // Gestion Erreur
@@ -70,7 +70,7 @@
                 var srcImglogoER = srcImglogoOFF;
                 var srcImglogoER_T = srcImglogoOFF_T;
             } else {
-                var srcImgURL_ER = "data/customTemplates/dashboard/cmd.action.other.Multi-action-Defaut/" + srcFolderErreur + '/';
+                var srcImgURL_ER = "data/img/" + srcFolderErreur + '/';
             };
 
             // Affichage durée changement dernier etat
