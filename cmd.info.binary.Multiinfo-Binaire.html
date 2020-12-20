@@ -54,9 +54,9 @@
             // Paramétrage des dossiers
             var srcFolder = ('#dossier#' != '#' + 'dossier#') ? "#dossier#" : "fibarooeil";
             if (srcFolder == 'NULL') {
-                var srcImgURL = "data/customTemplates/dashboard/cmd.action.other.Multi-action-Defaut/";
+                var srcImgURL = "data/img/";
             } else {
-                var srcImgURL = "data/customTemplates/dashboard/cmd.action.other.Multi-action-Defaut/" + srcFolder + '/';
+                var srcImgURL = "data/img/" + srcFolder + '/';
             };
 
             // Gestion Erreur
@@ -70,7 +70,7 @@
                 var srcImglogoER = srcImglogoOFF;
                 var srcImglogoER_T = srcImglogoOFF_T;
             } else {
-                var srcImgURL_ER = "data/customTemplates/dashboard/cmd.action.other.Multi-action-Defaut/" + srcFolderErreur + '/';
+                var srcImgURL_ER = "data/img/" + srcFolderErreur + '/';
             };
 
             // Affichage durée changement dernier etat
